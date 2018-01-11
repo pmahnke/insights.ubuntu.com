@@ -256,7 +256,9 @@ def _normalise_posts(posts):
             post['excerpt']['rendered'] = textwrap.shorten(post['excerpt']['rendered'], width=250, placeholder="&hellip;")
             post['excerpt']['rendered'] = re.sub( r"\[\&hellip;\]", "&hellip;", post['excerpt']['rendered'] )
             post['excerpt']['rendered'] = re.sub( r"h\d>", "p>", post['excerpt']['rendered'] )
-        post = _normalise_post(post)
+            print (post['excerpt']['rendered'])
+            post['excerpt']['rendered'] = re.sub( r"((http|https|ftp)\://([a-zA-Z0-9\-\.]+\.+[a-zA-Z]{2,3})(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~]*)[^\.\,\)\(\s]?)", "<a \g<1>>\g<1></a>", post['excerpt']['rendered'] )
+            post = _normalise_post(post)
     return posts
 
 
